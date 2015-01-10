@@ -1,5 +1,4 @@
 var L = require('leaflet'); 
-
 var map = L.map('map');
 
 L.tileLayer('http://{s}.tiles.mapbox.com/v3/esywong.knhb1ae0/{z}/{x}/{y}.png', {
