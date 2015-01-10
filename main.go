@@ -14,8 +14,8 @@ func main() {
 	})
 
 	n := negroni.New()
-	n.UseHandler(router)
 	n.Use(negroni.NewStatic(http.Dir("webapp/public")))
+	n.UseHandler(router)
 
 	n.Run(":8048")
 }
