@@ -8,6 +8,7 @@ import (
 )
 
 func Stops(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	sd, _ := transit.GetStopData()
 	out, _ := json.Marshal(sd.Routes[0])
 	fmt.Fprint(w, string(out))

@@ -8,7 +8,8 @@
     "object-assign": "^2.0.0",
     "react": "^0.12.2",
     "react-router": "^0.11.6",
-    "reactify": "^0.17.1"
+    "reactify": "^0.17.1",
+    "superagent": "^0.21.0"
   },
   "devDependencies": {
     "browserify": "^8.0.3",
