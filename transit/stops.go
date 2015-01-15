@@ -14,7 +14,7 @@ type StopResponse struct {
 type Route struct {
 	Title string  `xml:"title,attr" json:"title"`
 	Stops []*Stop `xml:"stop" json:"stops"`
-	Paths []*Path `xml:"path" json:"path"`
+	Paths []*Path `xml:"path" json:"paths"`
 }
 
 type Path struct {
