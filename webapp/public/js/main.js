@@ -8,7 +8,6 @@ L.tileLayer('http://{s}.tiles.mapbox.com/v3/esywong.knhb1ae0/{z}/{x}/{y}.png', {
 
 map.setView([37.7816579, -122.4045532], 15);
 L.Icon.Default.imagePath = "/vendor/leaflet/dist/images";
-L.marker([37.77606,-122.39436]).addTo(map);
 
 request
 	.get('/stops')
