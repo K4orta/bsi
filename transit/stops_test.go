@@ -26,24 +26,36 @@ func TestUnmarshalStops(t *testing.T) {
 						<stop tag="5212" />
 					</direction>
 					<direction tag="N__OB1" title="Outbound to Ocean Beach via Downtown" name="Outbound" useForUI="true">
-					  <stop tag="5240" />
-					  <stop tag="5237" />
-					  <stop tag="7145" />
-					  <stop tag="4510" />
+						<stop tag="5240" />
+						<stop tag="5237" />
+						<stop tag="7145" />
+						<stop tag="4510" />
 					</direction>
+					<path>
+						<point lat="37.76017" lon="-122.50878"/>
+						<point lat="37.7603" lon="-122.50812"/>
+						<point lat="37.76039" lon="-122.50606"/>
+						<point lat="37.76052" lon="-122.50284"/>
+						<point lat="37.76068" lon="-122.49915"/>
+						<point lat="37.76083" lon="-122.49596"/>
+					</path>
 				</route>
 			</body>
 		 `)
 	}))
 	stopApiUrl = fakeServer.URL
 
-	sd, err := getStopData()
+	sd, err := GetStopData()
 	if err != nil {
 		t.Error("Test failed", err)
 	}
 
 	if sd == nil {
 		t.Error("Failed to unmashal route", sd)
+	}
+
+	if sd.Routes[0].Paths == nil {
+		t.Error("Failed to unmashal paths", sd.Routes)
 	}
 
 	if len(sd.Routes[0].Stops) != 5 {

@@ -10,9 +10,20 @@ type StopResponse struct {
 	XMLName xml.Name `xml:"body"`
 	Routes  []*Route `xml:"route"`
 }
+
 type Route struct {
 	Title string  `xml:"title,attr" json:"title"`
 	Stops []*Stop `xml:"stop" json:"stops"`
+	Paths []*Path `xml:"path" json:"path"`
+}
+
+type Path struct {
+	Points []*Point `xml:"point" json:"points"`
+}
+
+type Point struct {
+	Lat float64 `xml:"lat,attr" json:"lat"`
+	Lng float64 `xml:"lon,attr" json:"lng"`
 }
 
 type Stop struct {
