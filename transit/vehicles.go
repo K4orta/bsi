@@ -17,8 +17,8 @@ type LastT struct {
 }
 
 type Vehicle struct {
-	Id               string  `xml:"id,attr"`
-	RouteTag         string  `xml:"routeTag,attr"`
+	Id               string  `xml:"id,attr" json:"id"`
+	RouteTag         string  `xml:"routeTag,attr" json:"routeTag"`
 	Lat              float32 `xml:"lat,attr"`
 	Lng              float32 `xml:"lon,attr"`
 	Heading          float32 `xml:"heading,attr"`

@@ -11,23 +11,23 @@ type StopResponse struct {
 	Routes  []*Route `xml:"route"`
 }
 type Route struct {
-	Title string  `xml:"title,attr"`
-	Stops []*Stop `xml:"stop"`
+	Title string  `xml:"title,attr" json:"title"`
+	Stops []*Stop `xml:"stop" json:"stops"`
 }
 
 type Stop struct {
-	Title  string  `xml:"title,attr"`
-	Tag    string  `xml:"tag,attr"`
-	StopId string  `xml:"stopId,attr"`
-	Lat    float32 `xml:"lat,attr"`
-	Lng    float32 `xml:"log,attr"`
+	Title  string  `xml:"title,attr" json:"title"`
+	Tag    string  `xml:"tag,attr" json:"tag"`
+	StopId string  `xml:"stopId,attr" json:"stopId"`
+	Lat    float32 `xml:"lat,attr" json:"lat"`
+	Lng    float32 `xml:"log,attr" json:"lng"`
 }
 
 var (
 	stopApiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=N"
 )
 
-func getStopData() (*StopResponse, error) {
+func GetStopData() (*StopResponse, error) {
 	resp, err := http.Get(stopApiUrl)
 	if err != nil {
 		return nil, err
