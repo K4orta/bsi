@@ -8,7 +8,7 @@ import (
 
 type VehicalResponse struct {
 	XMLName  xml.Name   `xml:"body"`
-	Vehicles []*Vehicle `xml:"vehicle"`
+	Vehicles []*Vehicle `xml:"vehicle" json:"vehicles"`
 	LastTime LastT      `xml:"lastTime"`
 }
 
@@ -19,13 +19,13 @@ type LastT struct {
 type Vehicle struct {
 	Id               string  `xml:"id,attr" json:"id"`
 	RouteTag         string  `xml:"routeTag,attr" json:"routeTag"`
-	Lat              float32 `xml:"lat,attr"`
-	Lng              float32 `xml:"lon,attr"`
-	Heading          float32 `xml:"heading,attr"`
-	LeadingVehicleId string  `xml:"leadingVehicleId,attr"`
-	Predictable      bool    `xml:"predictable,attr"`
-	SpeedKmHr        float32 `xml:"speedKmHr,attr"`
-	SecsSinceReport  int     `xml:"secsSinceReport,attr"`
+	Lat              float32 `xml:"lat,attr" json:"lat"`
+	Lng              float32 `xml:"lon,attr" json:"lng"`
+	Heading          float32 `xml:"heading,attr" json:"heading"`
+	LeadingVehicleId string  `xml:"leadingVehicleId,attr" json:"leadingVehicleId"`
+	Predictable      bool    `xml:"predictable,attr" json:"predictalbe"`
+	SpeedKmHr        float32 `xml:"speedKmHr,attr" json:"speedKmHr"`
+	SecsSinceReport  int     `xml:"secsSinceReport,attr" json:"secsSinceReport"`
 }
 
 var (
