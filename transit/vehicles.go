@@ -2,8 +2,10 @@ package transit
 
 import (
 	"encoding/xml"
+	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
 type VehicalResponse struct {
@@ -29,12 +31,13 @@ type Vehicle struct {
 }
 
 var (
-	apiUrl   = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=N&t=1420912755000"
-	lastTime = 0
+	apiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=N&t=0"
 )
 
+var lastTime int64
+
 func GetVehiclesData() (*VehicalResponse, error) {
-	resp, err := http.Get(apiUrl)
+	resp, err := http.Get(apiUrl + strconv.FormatInt(lastTime, 10))
 	if err != nil {
 		return nil, err
 	}
@@ -44,6 +47,9 @@ func GetVehiclesData() (*VehicalResponse, error) {
 		return nil, err
 	}
 	var vr VehicalResponse
+	// lastTime = vr.LastTime.Time
+	fmt.Println(string(b))
+	fmt.Println(vr.LastTime)
 	xml.Unmarshal([]byte(b), &vr)
 	return &vr, nil
 }
