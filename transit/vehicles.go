@@ -11,11 +11,11 @@ import (
 type VehicalResponse struct {
 	XMLName  xml.Name   `xml:"body"`
 	Vehicles []*Vehicle `xml:"vehicle" json:"vehicles"`
-	LastTime LastT      `xml:"lastTime"`
+	LastTime LastT      `xml:"lastTime" json:"lastTime"`
 }
 
 type LastT struct {
-	Time int64 `xml:"time,attr"`
+	Time int64 `xml:"time,attr" json:"time"`
 }
 
 type Vehicle struct {
@@ -31,10 +31,10 @@ type Vehicle struct {
 }
 
 var (
-	apiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=N&t=0"
+	apiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=N&t="
 )
 
-var lastTime int64
+var lastTime int64 = 0
 
 func GetVehiclesData() (*VehicalResponse, error) {
 	resp, err := http.Get(apiUrl + strconv.FormatInt(lastTime, 10))
@@ -47,9 +47,10 @@ func GetVehiclesData() (*VehicalResponse, error) {
 		return nil, err
 	}
 	var vr VehicalResponse
-	// lastTime = vr.LastTime.Time
-	fmt.Println(string(b))
-	fmt.Println(vr.LastTime)
+
 	xml.Unmarshal([]byte(b), &vr)
+	lastTime = vr.LastTime.Time
+	fmt.Println(lastTime)
+
 	return &vr, nil
 }
