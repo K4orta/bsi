@@ -31,7 +31,7 @@ type Vehicle struct {
 }
 
 var (
-	apiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=N&t="
+	apiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni&r=71&t="
 )
 
 var lastTime int64 = 0

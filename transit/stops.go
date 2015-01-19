@@ -35,7 +35,7 @@ type Stop struct {
 }
 
 var (
-	stopApiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=N"
+	stopApiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=71"
 )
 
 func GetStopData() (*StopResponse, error) {
