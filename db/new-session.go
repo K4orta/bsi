@@ -5,7 +5,7 @@ import (
 )
 
 func NewSession() (*gocql.Session, error) {
-	c := gocql.NewCluster("192.168.0.1")
+	c := gocql.NewCluster("localhost")
 	c.Keyspace = "bsi"
 	c.Consistency = gocql.Quorum
 	session, err := c.CreateSession()
