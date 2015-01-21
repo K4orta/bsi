@@ -19,7 +19,7 @@ func InsertVehicle(vehicle *transit.Vehicle) error {
 	defer s.Close()
 
 	date := dateFromDateTime(time.Now())
-	if err := s.Query(`INSERT INTO vehicles_by_day (route, id, date, time, heading, lat, lng, leading_vehicle_id, predictable, secs_since_report, speed_km_hr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, vehicle.RouteTag, vehicle.Id, date, time.Now(), vehicle.Heading, vehicle.Lat, vehicle.Lng, vehicle.LeadingVehicleId, vehicle.Predictable, vehicle.SecsSinceReport, vehicle.SpeedKmHr).Exec(); err != nil {
+	if err := s.Query(`INSERT INTO vehicles_by_day (route, id, date, time, heading, lat, lng, leading_vehicle_id, predictalbe, secs_since_report, speed_km_hr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, vehicle.RouteTag, vehicle.Id, date, time.Now(), int(vehicle.Heading), vehicle.Lat, vehicle.Lng, vehicle.LeadingVehicleId, vehicle.Predictable, vehicle.SecsSinceReport, vehicle.SpeedKmHr).Exec(); err != nil {
 		log.Fatal(err)
 	}
 
