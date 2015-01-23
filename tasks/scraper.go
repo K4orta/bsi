@@ -11,12 +11,14 @@ var (
 	routes = []string{
 		"71",
 		"N",
+		"71L",
+		"16X"
 	}
 )
 
 func StartScrape() {
 	for {
-		fmt.Println("Starting Scrape")
+		fmt.Println("Starting Scrape\n")
 		scrape()
 		time.Sleep(time.Minute)
 	}
@@ -31,5 +33,5 @@ func scrape() {
 			results += len(vr.Vehicles)
 		}
 	}
-	fmt.Printf("Got %v results at %v", results, time.Now())
+	fmt.Printf("Got %v results at %v\n", results, time.Now())
 }

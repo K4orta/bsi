@@ -32,8 +32,10 @@ var (
 	apiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni"
 )
 
+var lastTime int64
+
 func GetVehiclesData(route string) (*VehicalResponse, error) {
-	resp, err := http.Get(apiUrl + "&r=" + route + "&t=0")
+	resp, err := http.Get(apiUrl + "&r=" + route + "&t=" + lastTime)
 	if err != nil {
 		return nil, err
 	}
@@ -45,6 +47,6 @@ func GetVehiclesData(route string) (*VehicalResponse, error) {
 	var vr VehicalResponse
 
 	xml.Unmarshal([]byte(b), &vr)
-
+	lastTime = vr.LastTime.Time
 	return &vr, nil
 }
