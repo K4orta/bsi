@@ -10,7 +10,7 @@ import (
 
 func Vehicles(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	vd, _ := transit.GetVehiclesData()
+	vd, _ := transit.GetVehiclesData("N")
 
 	db.InsertVehicles(vd.Vehicles)
 

@@ -4,6 +4,7 @@ import (
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
 	"github.com/k4orta/bsi/api"
+	"github.com/k4orta/bsi/tasks"
 	"net/http"
 )
 
@@ -15,6 +16,8 @@ func main() {
 	n := negroni.New()
 	n.Use(negroni.NewStatic(http.Dir("webapp/public")))
 	n.UseHandler(router)
+
+	tasks.Scrape()
 
 	n.Run(":8048")
 }
