@@ -17,7 +17,7 @@ func main() {
 	n.Use(negroni.NewStatic(http.Dir("webapp/public")))
 	n.UseHandler(router)
 
-	tasks.Scrape()
+	tasks.StartScrape()
 
 	n.Run(":8048")
 }
