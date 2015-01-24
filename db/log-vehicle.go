@@ -24,13 +24,19 @@ func InsertVehicles(vehicles []*transit.Vehicle) error {
 	}
 	defer s.Close()
 	for _, v := range vehicles {
-		err := serializeVehicle(s, v)
-		if err != nil {
-			log.Println(err)
+		if v.LeadingVehicleId == "" {
+			err := serializeVehicle(s, v)
+			if err != nil {
+				log.Println(err)
+			}
 		}
 	}
 
 	return nil
+}
+
+func GetVehicles(route string) ([]*Vehicles, error) {
+	return nil, nil
 }
 
 func dateFromDateTime(t time.Time) string {

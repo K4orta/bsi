@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
 type VehicalResponse struct {
@@ -35,7 +36,7 @@ var (
 var lastTime int64 = 0
 
 func GetVehiclesData(route string) (*VehicalResponse, error) {
-	resp, err := http.Get(apiUrl + "&r=" + route + "&t=" + lastTime)
+	resp, err := http.Get(apiUrl + "&r=" + route + "&t=" + strconv.FormatInt(lastTime, 10))
 	if err != nil {
 		return nil, err
 	}
