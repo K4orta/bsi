@@ -32,7 +32,7 @@ var (
 	apiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a=sf-muni"
 )
 
-var lastTime int64
+var lastTime int64 = 0
 
 func GetVehiclesData(route string) (*VehicalResponse, error) {
 	resp, err := http.Get(apiUrl + "&r=" + route + "&t=" + lastTime)
