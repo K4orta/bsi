@@ -45,7 +45,7 @@ func TestUnmarshalStops(t *testing.T) {
 	}))
 	stopApiUrl = fakeServer.URL
 
-	sd, err := GetStopData()
+	sd, err := GetStopData("N")
 	if err != nil {
 		t.Error("Test failed", err)
 	}

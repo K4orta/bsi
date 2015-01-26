@@ -1,9 +1,7 @@
 package db
 
 import (
-	"fmt"
 	"github.com/k4orta/bsi/transit"
-	"time"
 )
 
 func GetVehicles(route string) ([]*transit.Vehicle, error) {
@@ -12,17 +10,15 @@ func GetVehicles(route string) ([]*transit.Vehicle, error) {
 		return nil, err
 	}
 	defer s.Close()
-	iter := s.Query(`SELECT route, id, date, time, heading, lat, lng, leading_vehicle_id, predictalbe, secs_since_report, speed_km_hr FROM vehicles_by_day`).Iter()
+	iter := s.Query(`SELECT route, id, date, time, heading, lat, lng, leading_vehicle_id, predictalbe, secs_since_report, speed_km_hr FROM vehicles_by_day WHERE route = ? AND date = ?`, route, "1-24-2015").Iter()
 
 	tv := transit.Vehicle{}
 	var date string
-	var t time.Time
+	vehicles := []*transit.Vehicle{}
 
-	fmt.Println("Results:")
-	for iter.Scan(&tv.RouteTag, &tv.Id, &date, &t, &tv.Heading, &tv.Lat, &tv.Lng, &tv.LeadingVehicleId, &tv.Predictable, &tv.SecsSinceReport, &tv.SpeedKmHr) {
-
-		fmt.Println(tv, date, t)
+	for iter.Scan(&tv.RouteTag, &tv.Id, &date, &tv.TimeLogged, &tv.Heading, &tv.Lat, &tv.Lng, &tv.LeadingVehicleId, &tv.Predictable, &tv.SecsSinceReport, &tv.SpeedKmHr) {
+		vehicles = append(vehicles, &transit.Vehicle{tv.Id, tv.RouteTag, tv.Lat, tv.Lng, tv.Heading, tv.LeadingVehicleId, tv.Predictable, tv.SpeedKmHr, tv.SecsSinceReport, tv.TimeLogged})
 	}
 
-	return nil, nil
+	return vehicles, nil
 }

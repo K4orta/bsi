@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 type VehicalResponse struct {
@@ -27,6 +28,7 @@ type Vehicle struct {
 	Predictable      bool    `xml:"predictable,attr" json:"predictalbe"`
 	SpeedKmHr        float32 `xml:"speedKmHr,attr" json:"speedKmHr"`
 	SecsSinceReport  int     `xml:"secsSinceReport,attr" json:"secsSinceReport"`
+	TimeLogged       time.Time
 }
 
 var (

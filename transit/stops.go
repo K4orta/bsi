@@ -35,11 +35,11 @@ type Stop struct {
 }
 
 var (
-	stopApiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r=71"
+	stopApiUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=routeConfig&a=sf-muni&r="
 )
 
-func GetStopData() (*StopResponse, error) {
-	resp, err := http.Get(stopApiUrl)
+func GetStopData(route string) (*StopResponse, error) {
+	resp, err := http.Get(stopApiUrl + route)
 	if err != nil {
 		return nil, err
 	}
