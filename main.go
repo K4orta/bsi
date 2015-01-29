@@ -10,8 +10,8 @@ import (
 
 func main() {
 	router := mux.NewRouter()
-	router.HandleFunc("/stops", api.Stops)
-	router.HandleFunc("/vehicles", api.Vehicles)
+	router.HandleFunc("/stops/{route}", api.Stops)
+	router.HandleFunc("/vehicles/{route}", api.Vehicles)
 	router.HandleFunc("/routes/{route}", api.RouteByDay)
 
 	n := negroni.New()
