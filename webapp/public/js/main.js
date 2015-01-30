@@ -10,7 +10,7 @@ map.setView([37.7816579, -122.4045532], 15);
 L.Icon.Default.imagePath = "/vendor/leaflet/dist/images";
 
 request
-	.get('/stops')
+	.get('/stops/N')
 	.set('Accepts', 'application/json')
 	.end(function(err, res) {
 		res.body.stops.forEach(function(stop) {
@@ -23,11 +23,10 @@ request
 	});
 
 request
-	.get('/vehicles')
+	.get('/routes/N')
 	.set('Accepts', 'application/json')
 	.end(function(err, res) {
-		console.log(res.body);
-		res.body.vehicles.forEach(function(vehicle) {
-				L.marker([vehicle.lat, vehicle.lng]).addTo(map);
+		res.body.forEach(function(vehicle) {
+			L.marker([vehicle.lat, vehicle.lng]).addTo(map);
 		});
 	});
