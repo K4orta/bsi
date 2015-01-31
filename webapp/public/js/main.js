@@ -13,10 +13,6 @@ request
 	.get('/stops/N')
 	.set('Accepts', 'application/json')
 	.end(function(err, res) {
-		res.body.stops.forEach(function(stop) {
-			// L.marker([stop.lat, stop.lng]).addTo(map);
-		});
-
 		res.body.paths.forEach(function(path) {
 			L.polyline(path.points).addTo(map);
 		});
