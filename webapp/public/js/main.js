@@ -10,7 +10,7 @@ map.setView([37.7816579, -122.4045532], 15);
 L.Icon.Default.imagePath = "/vendor/leaflet/dist/images";
 
 request
-	.get('/stops/N')
+	.get('/stops/71')
 	.set('Accepts', 'application/json')
 	.end(function(err, res) {
 		res.body.paths.forEach(function(path) {
@@ -19,7 +19,7 @@ request
 	});
 
 request
-	.get('/routes/N')
+	.get('/routes/71')
 	.set('Accepts', 'application/json')
 	.end(function(err, res) {
 		res.body.forEach(function(vehicle) {
