@@ -1,10 +1,11 @@
-var React = require('react');
+var React = require('react'),
+	Map = require('./map.react');
 
 var Index = React.createClass({
 	render: function() {
 		return (
 			<div> 
-				Index
+				<Map />
 			</div>
 		);
 	}

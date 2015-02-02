@@ -5,7 +5,8 @@ module.exports = function(gulp) {
       buffer = require('vinyl-buffer'),
       gutil = require('gulp-util'),
       reactify = require('reactify'),
-      uglify = require('gulp-uglify');
+      uglify = require('gulp-uglify'),
+      livereload = require('gulp-livereload');
 
 
   gulp.task('browserify', function() {
@@ -15,6 +16,7 @@ module.exports = function(gulp) {
       .pipe(source('main.js'))
       .pipe(buffer())
       .pipe(uglify())
-      .pipe(gulp.dest('./public/dist/'));
+      .pipe(gulp.dest('./public/dist/'))
+      .pipe(livereload());
   });
 };
