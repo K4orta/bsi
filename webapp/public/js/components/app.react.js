@@ -10,7 +10,7 @@ var App = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<h3>Hey there!!</h3>
+				<nav>Hey there!!</nav>
 				<RouteHandler />
 			</div>
 		);
