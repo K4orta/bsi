@@ -12,6 +12,7 @@ func main() {
 	router := mux.NewRouter()
 	router.HandleFunc("/stops/{route}", api.Stops)
 	router.HandleFunc("/vehicles/{route}", api.Vehicles)
+	router.HandleFunc("/routes", api.Routes)
 	router.HandleFunc("/routes/{route}", api.RouteByDay)
 
 	n := negroni.New()

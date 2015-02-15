@@ -21,7 +21,7 @@ func StartScrape() {
 		fmt.Println("Starting Scrape\n")
 		scrape()
 		db.GetVehicles("N")
-		time.Sleep(time.Minute * 5)
+		time.Sleep(time.Minute)
 	}
 }
 

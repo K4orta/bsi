@@ -1,17 +1,16 @@
-var React = require('react');
-var L = require('leaflet'),
-	request = require('superagent'); 
+import React from 'react';
+import L from 'leaflet';
+import request from 'superagent';
 
-
-module.exports = React.createClass({
-	componentDidMount: function() {
+let Map = React.createClass({
+	componentDidMount() {
 		var map = L.map('map');
 
 		L.tileLayer('http://{s}.tiles.mapbox.com/v3/esywong.knhb1ae0/{z}/{x}/{y}.png', {
 			maxZoom: 18
 		}).addTo(map);
 
-		map.setView([37.7816579, -122.4045532], 15);
+		map.setView([37.7816579, -122.4045532], 13);
 
 		request
 			.get('/stops/71')
@@ -22,9 +21,11 @@ module.exports = React.createClass({
 				});
 			});
 	},
-	render: function() {
+	render() {
 		return (
 			<div id='map'></div>
 		);
 	}
 });
+
+export default Map;
