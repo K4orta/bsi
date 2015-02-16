@@ -43,7 +43,7 @@ func TestUnmarshalStops(t *testing.T) {
 			</body>
 		 `)
 	}))
-	stopApiUrl = fakeServer.URL
+	stopApiUrl = fakeServer.URL + "/"
 
 	sd, err := GetStopData("N")
 	if err != nil {

@@ -7,6 +7,13 @@ import (
 	"testing"
 )
 
+func TestLastRequestTime(t *testing.T) {
+	time := LastRequestTime("N")
+	if time != 0 {
+		t.Error("Expected a time of zero, got: ", time)
+	}
+}
+
 func TestGetVehicles(t *testing.T) {
 	fakeServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/xml")
@@ -36,9 +43,9 @@ func TestGetVehicles(t *testing.T) {
 			</body>
 		 `)
 	}))
-	apiUrl = fakeServer.URL
+	apiUrl = fakeServer.URL + "/"
 
-	vd, err := getVehiclesData()
+	vd, err := GetVehiclesData("N")
 	if err != nil {
 		t.Error("Test failed", err)
 	}

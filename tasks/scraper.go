@@ -20,7 +20,7 @@ func StartScrape() {
 	for {
 		fmt.Println("Starting Scrape\n")
 		scrape()
-		db.GetVehicles("N")
+		// db.GetVehicles("N")
 		time.Sleep(time.Minute)
 	}
 }
