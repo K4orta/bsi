@@ -10,4 +10,10 @@ export default class RouteActions extends Actions {
 			routes: resp.body
 		};
 	}
+
+	setActiveRoute(route) {
+		return {
+			route: route
+		};
+	}
 }

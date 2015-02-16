@@ -23,6 +23,7 @@ let StopRenderer = (flux, map) => {
 			paths.forEach((path) => {
 				map.removeLayer(path);
 			});
+			paths = [];
 
 			stops.get('paths').forEach((path) => {
 				paths.push(L.polyline(path.get('points').toJS()).addTo(map));

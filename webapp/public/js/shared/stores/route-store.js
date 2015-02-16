@@ -9,7 +9,9 @@ export default class RouteStore extends Store {
 		let actionIds = flux.getActionIds('routes');
 
 		this.register(actionIds.getRoutes, this.updateRouteList);
+		this.register(actionIds.setActiveRoute, this.activeRoute);
 		this.state = {
+			activeRoute: undefined,
 			routes: Immutable.List()
 		};
 	}
@@ -19,6 +21,11 @@ export default class RouteStore extends Store {
 			routes: Immutable.fromJS(routes)
 		});
 	}
+
+	activeRoute(action) {
+		console.log(this.state.activeRoute)
+		return this.state.activeRoute;
+	} 
 
 	getRoutes() {
 		return this.state.routes;
