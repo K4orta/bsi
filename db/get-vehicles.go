@@ -2,6 +2,7 @@ package db
 
 import (
 	"github.com/k4orta/bsi/transit"
+	"time"
 )
 
 func GetVehicles(route string) ([]*transit.Vehicle, error) {
@@ -10,7 +11,8 @@ func GetVehicles(route string) ([]*transit.Vehicle, error) {
 		return nil, err
 	}
 	defer s.Close()
-	iter := s.Query(`SELECT route, id, date, time, heading, lat, lng, leading_vehicle_id, predictalbe, secs_since_report, speed_km_hr FROM vehicles_by_day WHERE route = ? AND date = ?`, route, "1-24-2015").Iter()
+	now := time.Now()
+	iter := s.Query(`SELECT route, id, date, time, heading, lat, lng, leading_vehicle_id, predictalbe, secs_since_report, speed_km_hr FROM vehicles_by_day WHERE route = ? AND date = ?`, route, dateFromDateTime(now)).Iter()
 
 	tv := transit.Vehicle{}
 	var date string
