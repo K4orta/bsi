@@ -7,15 +7,59 @@ import (
 	"testing"
 )
 
-func TestLastRequestTime(t *testing.T) {
+func TestLastRequestTimeInit(t *testing.T) {
 	time := LastRequestTime("N")
 	if time != 0 {
 		t.Error("Expected a time of zero, got: ", time)
 	}
 }
 
+func TestLastRequestTime(t *testing.T) {
+	fakeServer := makeFakeServer()
+	apiUrl = fakeServer.URL + "/"
+	startTime := LastRequestTime("71")
+	GetVehiclesData("71")
+	afterTime := LastRequestTime("71")
+
+	if startTime == afterTime {
+		t.Error("Last request time was the same after calling GetVehiclesData")
+	}
+}
+
+func Test LastRequestTimeMultiRoute(t *testing.T) {
+	fakeServer := makeFakeServer()
+	apiUrl = fakeServer.URL + "/"
+	GetVehiclesData("71")
+	startTime := LastRequestTime("71")
+	GetVehiclesData("N")
+	afterTime := LastRequestTime("71")
+
+	if startTime != afterTime {
+		t.Error("GetVehiclesData is polluting unrelated route times")
+	}	
+}
+
 func TestGetVehicles(t *testing.T) {
-	fakeServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	fakeServer := makeFakeServer()
+	apiUrl = fakeServer.URL + "/"
+
+	vd, err := GetVehiclesData("N")
+	if err != nil {
+		t.Error("Test failed", err)
+	}
+
+	if len(vd.Vehicles) != 19 {
+		t.Error("Failed to unmarshal vehicles")
+	}
+
+	if vd.LastTime.Time != 1420919252102 {
+		t.Error("Failed to unmarshal lastTime field")
+	}
+
+}
+
+func makeFakeServer() *httptest.Server {
+	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/xml")
 		fmt.Fprint(w, `
 			<?xml version="1.0" encoding="utf-8" ?>
@@ -43,19 +87,4 @@ func TestGetVehicles(t *testing.T) {
 			</body>
 		 `)
 	}))
-	apiUrl = fakeServer.URL + "/"
-
-	vd, err := GetVehiclesData("N")
-	if err != nil {
-		t.Error("Test failed", err)
-	}
-
-	if len(vd.Vehicles) != 19 {
-		t.Error("Failed to unmarshal vehicles")
-	}
-
-	if vd.LastTime.Time != 1420919252102 {
-		t.Error("Failed to unmarshal lastTime field")
-	}
-
 }

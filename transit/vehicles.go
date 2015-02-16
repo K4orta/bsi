@@ -51,7 +51,7 @@ func GetVehiclesData(route string) (*VehicalResponse, error) {
 	var vr VehicalResponse
 
 	xml.Unmarshal([]byte(b), &vr)
-	lastTime = vr.LastTime.Time
+	lastRequestTimes[route] = vr.LastTime.Time
 	return &vr, nil
 }
 
