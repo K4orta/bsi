@@ -25,10 +25,27 @@ nav {
 	z-index: 2;
 }
 
+a {
+	text-decoration: none;
+}
+
 .route-list {
 	position: absolute;
 	bottom: 1rem;
 	left: 1rem;
-	padding: 1rem;
 	background-color: white;
+	box-shadow: 2px 2px 1px fade(black, 20%);
+}
+
+.route-list__item a {
+	padding: .25rem 1rem;
+	display: block;
+}
+
+.route-list__item a:hover { 
+	background-color: #eee;
+}
+
+.route-list__item a.active {
+	background-color: #ddd;
 }

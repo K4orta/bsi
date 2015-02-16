@@ -5,6 +5,7 @@ var React = require('react'),
 	Index = require('./index.react'),
 	RouteHandler = Router.RouteHandler;
 
+import Flux from '../shared/flux';
 
 var App = React.createClass({
 	render: function() {
@@ -20,12 +21,17 @@ var App = React.createClass({
 var routes = (
 	<Route path='/' handler={App}>
 		<DefaultRoute handler={Index}/>
+		<Route path='/route/:slug' handler={Index} />
 	</Route>
 );
 
-module.exports = function() {
-	Router.run(routes, function(Handler) {
-		React.render(<Handler />, document.querySelector('.content'));
+
+module.exports = (mapLib) => {
+	let flux = new Flux();	
+	Router.run(routes, (Handler, state) => {
+		React.withContext({flux, mapLib}, () => {
+			React.render(<Handler />, document.querySelector('.content'));
+		});
 	});
 };
 

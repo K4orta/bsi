@@ -12,12 +12,14 @@ module.exports = function(gulp) {
 
   gulp.task('browserify', function() {
     browserify(['./public/js/main.js'])
-      .transform(babelify)
+      .transform(babelify.configure({
+        experimental: true
+      }))
       .transform(reactify)
       .bundle()
       .pipe(source('main.js'))
-      .pipe(buffer())
-      .pipe(uglify())
+      // .pipe(buffer())
+      // .pipe(uglify())
       .on("error", function (err) { console.log("Error : " + err.message); })
       .pipe(gulp.dest('./public/dist/'))
       .pipe(livereload());

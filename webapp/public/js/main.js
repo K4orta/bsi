@@ -1,33 +1,23 @@
-// var L = require('leaflet'); 
-// var map = L.map('map');
-// var request = require('superagent'),
 var App = require('./components/app.react');
+import L from 'leaflet';
 
-// L.tileLayer('http://{s}.tiles.mapbox.com/v3/esywong.knhb1ae0/{z}/{x}/{y}.png', {
-// 	maxZoom: 18
-// }).addTo(map);
+require('6to5/runtime');
+import '6to5/polyfill';
 
-// map.setView([37.7816579, -122.4045532], 15);
-// L.Icon.Default.imagePath = "/vendor/leaflet/dist/images";
+/*
+ * Superagent promisification
+ */
+import { Request } from 'superagent';
 
-// request
-// 	.get('/stops/71')
-// 	.set('Accepts', 'application/json')
-// 	.end(function(err, res) {
-// 		res.body.paths.forEach(function(path) {
-// 			L.polyline(path.points).addTo(map);
-// 		});
-// 	});
+Request.prototype.exec = function() {
+  let req = this;
 
-// request
-// 	.get('/routes/71')
-// 	.set('Accepts', 'application/json')
-// 	.end(function(err, res) {
-// 		res.body.forEach(function(vehicle) {
-// 			var m = L.marker([vehicle.lat, vehicle.lng]).addTo(map);
-// 			// console.log(vehicle);
-// 			m.bindPopup(vehicle.id)
-// 		});
-// 	});
+  return new Promise ((resolve, reject) => {
+    req.end((error, res) => {
+      if (error) return reject(error);
+      resolve(res);
+    });
+  });
+};
 
-App();
+App(L);
