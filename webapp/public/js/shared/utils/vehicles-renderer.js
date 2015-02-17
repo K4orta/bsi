@@ -53,7 +53,7 @@ export default (flux, map, options) => {
 			}
 		});
 
-		return _.values(ret);
+		return _.values(ret).filter((v) => v.leadingVehicleId === "");
 	};
 
 	vehicleStore.addListener('change', that.render);
