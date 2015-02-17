@@ -11,4 +11,10 @@ export default class VehicleActions extends Actions {
 			vehicles: resp.body
 		};
 	}
+
+	changeTimeOffset(offset) {
+		return {
+			offset: offset
+		};
+	}
 }

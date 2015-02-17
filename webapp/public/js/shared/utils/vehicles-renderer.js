@@ -26,7 +26,7 @@ export default (flux, map, options) => {
 
 		let vehicles = vehicleStore.getVehicles().vehicles.toJS();
 
-		that.currentVehicles(vehicles).forEach((vehicle) => {
+		that.currentVehicles(vehicles, vehicleStore.getTimeOffset()).forEach((vehicle) => {
 			let m = L.marker([vehicle.lat, vehicle.lng]).addTo(map);
 			
 			m.bindPopup(`
