@@ -26,7 +26,7 @@ func TestLastRequestTime(t *testing.T) {
 	}
 }
 
-func Test LastRequestTimeMultiRoute(t *testing.T) {
+func TestLastRequestTimeMultiRoute(t *testing.T) {
 	fakeServer := makeFakeServer()
 	apiUrl = fakeServer.URL + "/"
 	GetVehiclesData("71")
@@ -36,7 +36,7 @@ func Test LastRequestTimeMultiRoute(t *testing.T) {
 
 	if startTime != afterTime {
 		t.Error("GetVehiclesData is polluting unrelated route times")
-	}	
+	}
 }
 
 func TestGetVehicles(t *testing.T) {

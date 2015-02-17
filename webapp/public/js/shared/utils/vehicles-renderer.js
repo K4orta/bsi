@@ -25,7 +25,7 @@ export default (flux, map, options) => {
 		renderedVehicles = [];
 
 		let vehicles = vehicleStore.getVehicles().vehicles.toJS();
-	
+
 		that.currentVehicles(vehicles).forEach((vehicle) => {
 			let m = L.marker([vehicle.lat, vehicle.lng]).addTo(map);
 			
@@ -43,11 +43,11 @@ export default (flux, map, options) => {
 	that.currentVehicles = (vehicles, time=Infinity) => {
 		let ret = {};
 		vehicles.forEach((v) => {
-			let nt = Date.parse(v.TimeLogged);
+			let nt = Date.parse(v.timeLogged);
 			if (nt < time) {
 				if(ret[v.id] === undefined) {
 					ret[v.id] = v;
-				} else if (nt > Date.parse(ret[v.id].TimeLogged)) {
+				} else if (nt > Date.parse(ret[v.id].timeLogged)) {
 					ret[v.id] = v;
 				}
 			}
