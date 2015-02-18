@@ -3,6 +3,7 @@ var React = require('react'),
 import RouteList from '../shared/components/route-list.react';
 // import RouteManager from '../shared/components/transit-route.react';
 import TimeControl from '../shared/components/time-control.react';
+import VehiclePanel from '../shared/components/vehicle-panel.react';
 
 var Index = React.createClass({
 	render: function() {
@@ -11,6 +12,7 @@ var Index = React.createClass({
 				<Map />
 				<RouteList />
 				<TimeControl />
+				<VehiclePanel />
 			</div>
 		);
 	}

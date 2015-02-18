@@ -12,7 +12,8 @@ export default class VehicleStore extends Store {
 		this.state = {
 			timeOffset: 0,
 			route: undefined,
-			vehicles: Immutable.List()
+			vehicles: Immutable.List(),
+			hiddenVehicles: []
 		}
 	}
 
@@ -28,7 +29,6 @@ export default class VehicleStore extends Store {
 	}
 
 	setTimeOffset({offset}) {
-		console.log(offset);
 		this.setState({
 			timeOffset: offset
 		});
@@ -39,5 +39,9 @@ export default class VehicleStore extends Store {
 			route: action.route,
 			vehicles: Immutable.fromJS(action.vehicles)
 		});
+	}
+
+	toggleHiddenVehice() {
+
 	}
 }

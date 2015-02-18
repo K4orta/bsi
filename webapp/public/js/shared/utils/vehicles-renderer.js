@@ -34,6 +34,7 @@ export default (flux, map, options) => {
 				predictalbe: ${vehicle.predictalbe}
 				leadingVehicleId: ${vehicle.leadingVehicleId}
 				secsSinceReport: ${vehicle.secsSinceReport}
+				dirTag: ${vehicle.dirTag}
 				`);
 
 			renderedVehicles.push(m);
@@ -43,17 +44,18 @@ export default (flux, map, options) => {
 	that.currentVehicles = (vehicles, time=Infinity) => {
 		let ret = {};
 		vehicles.forEach((v) => {
-			let nt = Date.parse(v.timeLogged);
+			let nt = Date.parse(v.timeLogged) - v.secsSinceReport;
 			if (nt < time) {
-				if(ret[v.id] === undefined) {
+				if( ret[v.id] === undefined ) {
 					ret[v.id] = v;
-				} else if (nt > Date.parse(ret[v.id].timeLogged)) {
+				} else if (nt > Date.parse(ret[v.id].timeLogged) - ret[v.id].secsSinceReport) {
+					
 					ret[v.id] = v;
 				}
 			}
 		});
 
-		return _.values(ret).filter((v) => v.leadingVehicleId === "");
+		return _.values(ret).filter((v) => v.predictalbe === true);
 	};
 
 	vehicleStore.addListener('change', that.render);
