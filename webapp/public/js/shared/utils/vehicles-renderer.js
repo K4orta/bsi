@@ -42,20 +42,23 @@ export default (flux, map, options) => {
 	};
 
 	that.currentVehicles = (vehicles, time=Infinity) => {
-		let ret = {};
-		vehicles.forEach((v) => {
-			let nt = Date.parse(v.timeLogged) - v.secsSinceReport;
-			if (nt < time) {
-				if( ret[v.id] === undefined ) {
-					ret[v.id] = v;
-				} else if (nt > Date.parse(ret[v.id].timeLogged) - ret[v.id].secsSinceReport) {
-					
-					ret[v.id] = v;
-				}
-			}
+		let ret;
+		return vehicles.filter((v) => {
+			return Math.abs(v.postTime - time) < (1000 * 30);
 		});
+		// let ret = {};
+		// vehicles.forEach((v) => {
+		// 	let nt = Date.parse(v.timeLogged) - v.secsSinceReport;
+		// 	if (nt < time) {
+		// 		if( ret[v.id] === undefined ) {
+		// 			ret[v.id] = v;
+		// 		} else if (nt > Date.parse(ret[v.id].timeLogged) - ret[v.id].secsSinceReport) {
+		// 			ret[v.id] = v;
+		// 		}
+		// 	}
+		// });
 
-		return _.values(ret).filter((v) => v.predictalbe === true);
+		// return _.values(ret).filter((v) => v.predictalbe === true);
 	};
 
 	vehicleStore.addListener('change', that.render);

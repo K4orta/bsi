@@ -1,5 +1,7 @@
 import { Store } from 'flummox';
 import Immutable from 'immutable';
+import assign from 'object-assign';
+import { groupBy } from 'lodash';
 
 export default class VehicleStore extends Store {
 	constructor(flux) {
@@ -34,14 +36,25 @@ export default class VehicleStore extends Store {
 		});
 	}
 
-	updateVehicles(action) {
+	updateVehicles({route, vehicles}) {
+		let buffed = vehicles.map((v) => {
+			return assign(v, {
+				postTime: Date.parse(v.timeLogged),
+				visible: true
+			});
+		});
+
 		this.setState({
-			route: action.route,
-			vehicles: Immutable.fromJS(action.vehicles)
+			route: route,
+			vehicles: Immutable.fromJS(buffed)
 		});
 	}
 
-	toggleHiddenVehice() {
+	getTimedVehicles() {
+		return groupBy(this.state.vehicles, (v) => v.postTime);
+	}
+
+	toggleHiddenVehice({id, show}) {
 
 	}
 }
